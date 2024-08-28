@@ -16,7 +16,7 @@
             android:name=".SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".Startscreen"
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
