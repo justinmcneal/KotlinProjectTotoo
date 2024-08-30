@@ -51,10 +51,12 @@
             android:background="@drawable/custom_edittextbg">
 
             <EditText
-                android:id="@+id/etUsername2"
+                android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
+                android:maxLines="1"
+                android:inputType="text"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/baseline_person_outline_24"
                 android:drawablePadding="15dp"
@@ -62,9 +64,11 @@
                 android:layout_marginTop="20dp" />
 
             <EditText
-                android:id="@+id/etPassword2"
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1"
                 android:hint="Password"
                 android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/baseline_lock_outline_24"
@@ -73,6 +77,7 @@
                 android:padding="20dp" />
 
             <TextView
+                android:id="@+id/tvForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Forgot Password?"

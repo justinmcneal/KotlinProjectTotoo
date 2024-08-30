@@ -25,7 +25,7 @@ class SignupActivity : AppCompatActivity() {
         this.etUsername = findViewById(R.id.etUsername)
         this.etEmail = findViewById(R.id.etEmail)
         this.etPassword = findViewById(R.id.etPassword)
-        this.etConPassword = findViewById(R.id.etConPassword)
+        this.etConPassword = findViewById(R.id.etConfirmPassword)
         this.btnSignup = findViewById(R.id.btnSignup)
 
         btnSignup.setOnClickListener{
