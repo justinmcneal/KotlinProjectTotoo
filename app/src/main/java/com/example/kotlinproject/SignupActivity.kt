@@ -5,11 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
 class SignupActivity : AppCompatActivity() {
+
+    val tvLogin: TextView = findViewById(R.id.tvLogin)
 
     lateinit var etUsername : EditText
     lateinit var etEmail : EditText
@@ -61,6 +64,9 @@ class SignupActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
+        }
+        tvLogin.setOnClickListener { //clicakble textview
+            val intent = Intent(this, LogInActivity::class.java)
         }
 
         }
