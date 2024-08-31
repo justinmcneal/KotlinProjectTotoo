@@ -1,54 +1,20 @@
 package com.example.kotlinproject
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
-import android.view.MotionEvent
-import android.widget.EditText
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class ForgotPassword : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_forgot_password)
-
-        val etPassword = findViewById<EditText>(R.id.etPassword)
-        val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
-
-        val eyeOpenDrawable = ContextCompat.getDrawable(this, R.drawable.eyeiconview)
-        val eyeClosedDrawable = ContextCompat.getDrawable(this, R.drawable.eyeiconhide)
-
-        setupPasswordToggle(etPassword, eyeOpenDrawable, eyeClosedDrawable)
-        setupPasswordToggle(etConfirmPassword, eyeOpenDrawable, eyeClosedDrawable)
-    }
-
-    private fun setupPasswordToggle(editText: EditText, eyeOpenDrawable: Drawable?, eyeClosedDrawable: Drawable?) {
-        var isPasswordVisible = false
-
-        editText.setCompoundDrawablesWithIntrinsicBounds(null, null, eyeClosedDrawable, null)
-
-        editText.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_UP) {
-                val drawableEnd = editText.compoundDrawables[2] // Right drawable
-                drawableEnd?.let {
-                    if (event.rawX >= (editText.right - it.bounds.width())) {
-                        isPasswordVisible = !isPasswordVisible
-                        if (isPasswordVisible) {
-                            editText.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                            editText.setCompoundDrawablesWithIntrinsicBounds(null, null, eyeOpenDrawable, null)
-                        } else {
-                            editText.transformationMethod = PasswordTransformationMethod.getInstance()
-                            editText.setCompoundDrawablesWithIntrinsicBounds(null, null, eyeClosedDrawable, null)
-                        }
-                        editText.setSelection(editText.text.length)
-                        return@setOnTouchListener true
-                    }
-                }
-            }
-            false
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
     }
 }

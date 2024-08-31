@@ -27,7 +27,7 @@ class SplashScreen : AppCompatActivity() {
             startActivity(Intent(this@SplashScreen, SignupActivity::class.java))
             // Finish the SplashActivity so the user can't go back to it
             finish()
-        }, 4000)
+        }, 3000)
 
     }
 }
