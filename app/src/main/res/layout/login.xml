@@ -46,9 +46,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittextbg"
             android:orientation="vertical"
-            android:padding="35dp"
-            android:background="@drawable/custom_edittextbg">
+            android:padding="35dp">
 
             <EditText
                 android:id="@+id/etUsername"
@@ -67,10 +67,10 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLines="1"
                 android:hint="Password"
-                android:textSize="15dp"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:textSize="15sp"
                 android:background="@drawable/custom_edittext"
                 android:drawableRight="@drawable/eyeiconhide"
                 android:drawablePadding="15dp"
