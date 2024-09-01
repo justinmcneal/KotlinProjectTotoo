@@ -3,6 +3,7 @@ package com.example.kotlinproject
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.InputFilter
 import android.text.InputType
 import android.view.MotionEvent
 import android.widget.Button
@@ -20,7 +21,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var etConPassword: EditText
     private lateinit var btnSignup: Button
-    private lateinit var tvLogin: TextView // Declare tvLogin
+    private lateinit var tvLogin: TextView
 
     private var passwordVisible: Boolean = false
     private var leftDrawablePassword: Drawable? = null
@@ -36,16 +37,22 @@ class SignupActivity : AppCompatActivity() {
         etPassword = findViewById(R.id.etPassword)
         etConPassword = findViewById(R.id.etConfirmPassword)
         btnSignup = findViewById(R.id.btnSignup)
-        tvLogin = findViewById(R.id.tvLogin) // Initialize tvLogin
+        tvLogin = findViewById(R.id.tvLogin)
 
-        // Store the left drawables
         leftDrawablePassword = etPassword.compoundDrawables[0]
         leftDrawableConfirmPassword = etConPassword.compoundDrawables[0]
 
-        etPassword.setOnTouchListener { v, event ->
+        val noWhiteSpaceFilter = InputFilter { source, _, _, _, _, _ ->
+            if (source.contains(" ")) "" else source
+        }
+
+        etPassword.filters = arrayOf(noWhiteSpaceFilter)
+        etConPassword.filters = arrayOf(noWhiteSpaceFilter)
+
+        etPassword.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 val rightDrawable = etPassword.compoundDrawables[2]
-                if (event.rawX >= (etPassword.right - rightDrawable.bounds.width())) {
+                if (rightDrawable != null && event.rawX >= (etPassword.right - rightDrawable.bounds.width())) {
                     togglePasswordVisibility(etPassword)
                     return@setOnTouchListener true
                 }
@@ -53,10 +60,10 @@ class SignupActivity : AppCompatActivity() {
             false
         }
 
-        etConPassword.setOnTouchListener { v, event ->
+        etConPassword.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 val rightDrawable = etConPassword.compoundDrawables[2]
-                if (event.rawX >= (etConPassword.right - rightDrawable.bounds.width())) {
+                if (rightDrawable != null && event.rawX >= (etConPassword.right - rightDrawable.bounds.width())) {
                     togglePasswordVisibility(etConPassword)
                     return@setOnTouchListener true
                 }

@@ -3,6 +3,7 @@ package com.example.kotlinproject
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.InputFilter
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.MotionEvent
@@ -24,6 +25,12 @@ class ForgotPassword : AppCompatActivity() {
         val eyeOpenDrawable = ContextCompat.getDrawable(this, R.drawable.eyeiconview)
         val eyeClosedDrawable = ContextCompat.getDrawable(this, R.drawable.eyeiconhide)
 
+        val noWhiteSpaceFilter = InputFilter { source, _, _, _, _, _ ->
+            if (source.contains(" ")) "" else source
+        }
+        etPassword.filters = arrayOf(noWhiteSpaceFilter)
+        etConfirmPassword.filters = arrayOf(noWhiteSpaceFilter)
+
         setupPasswordToggle(etPassword, eyeOpenDrawable, eyeClosedDrawable)
         setupPasswordToggle(etConfirmPassword, eyeOpenDrawable, eyeClosedDrawable)
 
@@ -36,7 +43,6 @@ class ForgotPassword : AppCompatActivity() {
     private fun setupPasswordToggle(editText: EditText, eyeOpenDrawable: Drawable?, eyeClosedDrawable: Drawable?) {
         var isPasswordVisible = false
 
-        // Initialize with closed eye drawable
         editText.setCompoundDrawablesWithIntrinsicBounds(null, null, eyeClosedDrawable, null)
 
         editText.setOnTouchListener { v, event ->
@@ -60,5 +66,4 @@ class ForgotPassword : AppCompatActivity() {
             false
         }
     }
-
 }

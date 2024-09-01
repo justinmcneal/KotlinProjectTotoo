@@ -3,6 +3,7 @@ package com.example.kotlinproject
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.InputFilter
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.MotionEvent
@@ -29,6 +30,11 @@ class LogIn : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnLogin)
         tvForgotPassword = findViewById(R.id.tvForgotPassword)
         etPassword = findViewById(R.id.etPassword)
+
+        val noWhiteSpaceFilter = InputFilter { source, _, _, _, _, _ ->
+            if (source.contains(" ")) "" else source
+        }
+        etPassword.filters = arrayOf(noWhiteSpaceFilter)
 
         setupPasswordToggle(etPassword)
 
