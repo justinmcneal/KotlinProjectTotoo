@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/signupbg"
     android:orientation="vertical"
-    tools:context=".LogInActivity">
+    tools:context=".LogIn">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,7 +84,9 @@
                 android:text="Forgot Password?"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/opensansregular"
-                android:layout_gravity="right" />
+                android:layout_gravity="right"
+                android:clickable="true"
+                android:focusable="true"/>
 
             <Button
                 android:id="@+id/btnLogin"

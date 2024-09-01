@@ -1,73 +1,111 @@
 package com.example.kotlinproject
 
-
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.InputType
+import android.view.MotionEvent
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class SignupActivity : AppCompatActivity() {
 
-    val tvLogin: TextView = findViewById(R.id.tvLogin)
+    private lateinit var etUsername: EditText
+    private lateinit var etEmail: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var etConPassword: EditText
+    private lateinit var btnSignup: Button
+    private lateinit var tvLogin: TextView // Declare tvLogin
 
-    lateinit var etUsername : EditText
-    lateinit var etEmail : EditText
-    lateinit var  etPassword : EditText
-    lateinit var etConPassword : EditText
-    lateinit var btnSignup : Button
+    private var passwordVisible: Boolean = false
+    private var leftDrawablePassword: Drawable? = null
+    private var leftDrawableConfirmPassword: Drawable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_sign_up)
 
-        this.etUsername = findViewById(R.id.etUsername)
-        this.etEmail = findViewById(R.id.etEmail)
-        this.etPassword = findViewById(R.id.etPassword)
-        this.etConPassword = findViewById(R.id.etConfirmPassword)
-        this.btnSignup = findViewById(R.id.btnSignup)
+        etUsername = findViewById(R.id.etUsername)
+        etEmail = findViewById(R.id.etEmail)
+        etPassword = findViewById(R.id.etPassword)
+        etConPassword = findViewById(R.id.etConfirmPassword)
+        btnSignup = findViewById(R.id.btnSignup)
+        tvLogin = findViewById(R.id.tvLogin) // Initialize tvLogin
 
-        btnSignup.setOnClickListener{
-            var etUsername = etUsername.text.toString()
-            var etEmail = etEmail.text.toString()
-            var etPassword = etPassword.text.toString()
-            var etConPassword = etConPassword.text.toString()
+        // Store the left drawables
+        leftDrawablePassword = etPassword.compoundDrawables[0]
+        leftDrawableConfirmPassword = etConPassword.compoundDrawables[0]
 
-            if (etUsername == ""){
-                Toast.makeText(this@SignupActivity,
-                    "Please Enter your Username", Toast.LENGTH_SHORT).show()
+        etPassword.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val rightDrawable = etPassword.compoundDrawables[2]
+                if (event.rawX >= (etPassword.right - rightDrawable.bounds.width())) {
+                    togglePasswordVisibility(etPassword)
+                    return@setOnTouchListener true
+                }
             }
-            else if (etEmail == ""){
-                Toast.makeText(this@SignupActivity,
-                    "Please Enter your Email", Toast.LENGTH_SHORT).show()
-            }
-            else if (etPassword == ""){
-                Toast.makeText(this@SignupActivity,
-                    "Please Create a Password", Toast.LENGTH_SHORT).show()
-            }
-            else if (etConPassword == ""){
-                Toast.makeText(this@SignupActivity,
-                    "Please Confirm Your Password", Toast.LENGTH_SHORT).show()
-            }
-            else if (etPassword != etConPassword ){
-                Toast.makeText(this@SignupActivity,
-                    "Passwords do not match. Please try again.", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                Toast.makeText(this@SignupActivity,
-                    "Account created successfully!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, HomePage:: class.java)
-                startActivity(intent)
-            }
-
-        }
-        tvLogin.setOnClickListener { //clicakble textview
-            val intent = Intent(this, LogInActivity::class.java)
+            false
         }
 
+        etConPassword.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val rightDrawable = etConPassword.compoundDrawables[2]
+                if (event.rawX >= (etConPassword.right - rightDrawable.bounds.width())) {
+                    togglePasswordVisibility(etConPassword)
+                    return@setOnTouchListener true
+                }
+            }
+            false
+        }
+
+        btnSignup.setOnClickListener {
+            val username = etUsername.text.toString()
+            val email = etEmail.text.toString()
+            val password = etPassword.text.toString()
+            val confirmPassword = etConPassword.text.toString()
+
+            when {
+                username.isEmpty() -> showToast("Please Enter your Username")
+                email.isEmpty() -> showToast("Please Enter your Email")
+                password.isEmpty() -> showToast("Please Create a Password")
+                confirmPassword.isEmpty() -> showToast("Please Confirm Your Password")
+                password != confirmPassword -> showToast("Passwords do not match. Please try again.")
+                else -> {
+                    showToast("Account created successfully!")
+                    startActivity(Intent(this, HomePage::class.java))
+                }
+            }
+        }
+
+        tvLogin.setOnClickListener {
+            startActivity(Intent(this, LogIn::class.java))
         }
     }
+
+    private fun togglePasswordVisibility(editText: EditText) {
+        if (passwordVisible) {
+            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            setDrawable(editText, R.drawable.eyeiconhide)
+        } else {
+            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            setDrawable(editText, R.drawable.eyeiconview)
+        }
+        passwordVisible = !passwordVisible
+        editText.setSelection(editText.text.length)
+    }
+
+    private fun setDrawable(editText: EditText, rightDrawableId: Int) {
+        val rightDrawable = ContextCompat.getDrawable(this, rightDrawableId)
+        editText.setCompoundDrawablesWithIntrinsicBounds(leftDrawablePassword, null, rightDrawable, null)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+}

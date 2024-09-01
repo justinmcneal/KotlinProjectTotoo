@@ -141,9 +141,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Log In"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/opensansbold"
                 android:layout_gravity="center"
-                android:clickable="true"
                 android:textSize="16dp" />
 
         </LinearLayout>
