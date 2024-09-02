@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.ic_home -> setCurrentfragment(HomePagee())
                 R.id.ic_analytics -> setCurrentfragment( Analytics())
+                R.id.ic_completedTask -> setCurrentfragment(CompletedTask())
+                R.id.ic_profile -> setCurrentfragment(UserProfile())
+
                 else->{}
             }
             true

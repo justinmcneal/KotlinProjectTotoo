@@ -29,10 +29,10 @@ class SignupActivity : AppCompatActivity() {
         this.btnSignup = findViewById(R.id.btnSignup)
 
         btnSignup.setOnClickListener{
-            var etUsername = etUsername.text.toString()
-            var etEmail = etEmail.text.toString()
-            var etPassword = etPassword.text.toString()
-            var etConPassword = etConPassword.text.toString()
+            val etUsername = etUsername.text.toString()
+            val etEmail = etEmail.text.toString()
+            val etPassword = etPassword.text.toString()
+            val etConPassword = etConPassword.text.toString()
 
             if (etUsername == ""){
                 Toast.makeText(this@SignupActivity,
@@ -57,7 +57,7 @@ class SignupActivity : AppCompatActivity() {
             else {
                 Toast.makeText(this@SignupActivity,
                     "Account created successfully!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LogInActivity:: class.java)
+                val intent = Intent(this, LogIn:: class.java)
                 startActivity(intent)
             }
         }
