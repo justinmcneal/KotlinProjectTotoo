@@ -20,14 +20,9 @@ class SplashScreen : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        // Use a Handler to delay the execution of the code inside the runnable
         Handler(Looper.getMainLooper()).postDelayed({
-            // Start the MainActivity
-            startActivity(Intent(this@SplashScreen, SignupActivity::class.java))
-            // Finish the SplashActivity so the user can't go back to it
+            startActivity(Intent(this, SignupActivity::class.java))
             finish()
         }, 3000)
-
     }
 }
