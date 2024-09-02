@@ -57,10 +57,9 @@ class SignupActivity : AppCompatActivity() {
             else {
                 Toast.makeText(this@SignupActivity,
                     "Account created successfully!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, HomePage:: class.java)
+                val intent = Intent(this, LogInActivity:: class.java)
                 startActivity(intent)
             }
-
         }
 
         }
