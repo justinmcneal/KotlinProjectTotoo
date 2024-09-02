@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign Up"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:textSize="40sp"
             android:textColor="@color/black"
             android:fontFamily="@font/montaguslabregular" />
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create your Account"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:textSize="25sp"
             android:textColor="@color/black"
             android:fontFamily="@font/opensanslight" />
@@ -62,7 +62,8 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:padding="20dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:autofillHints="Username"/>
 
             <EditText
                 android:id="@+id/etEmail"
@@ -75,7 +76,8 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="20dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:autofillHints="Email" />
 
             <EditText
                 android:id="@+id/etPassword"
@@ -83,13 +85,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableRight="@drawable/eyeiconhide"
+                android:drawableEnd="@drawable/eyeiconhide"
                 android:drawablePadding="15dp"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="20dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:autofillHints="Password"/>
 
             <EditText
                 android:id="@+id/etConfirmPassword"
@@ -97,24 +100,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/custom_edittext"
-                android:drawableRight="@drawable/eyeiconhide"
+                android:drawableEnd="@drawable/eyeiconhide"
                 android:drawablePadding="15dp"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="20dp"
-                android:textSize="15sp" />
-
+                android:textSize="15sp"
+                android:autofillHints="Confirm Password"/>
 
             <Button
                 android:id="@+id/btnSignup"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="13dp"
                 android:backgroundTint="@color/saffron"
                 android:fontFamily="@font/montaguslabregular"
-                android:padding="13dp"
                 android:text="Sign Up"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -134,7 +136,8 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/opensansregular"
                 android:text="Already have an account?"
-                android:textSize="16dp" />
+                android:textSize="16sp"
+                android:layout_marginTop="13dp"/>
 
             <TextView
                 android:id="@+id/tvLogin"
@@ -145,7 +148,8 @@
                 android:focusable="true"
                 android:fontFamily="@font/opensansbold"
                 android:layout_gravity="center"
-                android:textSize="16dp" />
+                android:textSize="16sp"
+                android:layout_marginTop="13dp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
