@@ -57,8 +57,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
+                android:maxLines="1"
+                android:textColorHint="@color/gray"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_person_outline_24"
                 android:drawablePadding="15dp"
                 android:padding="20dp" />
 
@@ -67,8 +68,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
+                android:textColorHint="@color/gray"
+                android:maxLines="1"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/outline_email_24"
                 android:drawablePadding="15dp"
                 android:layout_marginTop="13dp"
                 android:padding="20dp" />
@@ -78,7 +80,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:textColorHint="@color/gray"
+                android:maxLines="1"
                 android:background="@drawable/custom_edittext"
+                android:drawableEnd="@drawable/eyeiconhide"
                 android:drawablePadding="15dp"
                 android:layout_marginTop="13dp"
                 android:padding="20dp" />
@@ -88,7 +93,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirm Password"
+                android:textColorHint="@color/gray"
+                android:maxLines="1"
                 android:background="@drawable/custom_edittext"
+                android:drawableEnd="@drawable/eyeiconhide"
                 android:drawablePadding="15dp"
                 android:layout_marginTop="13dp"
                 android:padding="20dp" />
