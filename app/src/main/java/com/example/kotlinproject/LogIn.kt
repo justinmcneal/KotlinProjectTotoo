@@ -39,7 +39,7 @@ class LogIn : AppCompatActivity() {
         setupPasswordToggle(etPassword)
 
         btnLogin.setOnClickListener {
-            val intent = Intent(this, HomePage::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 

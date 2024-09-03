@@ -85,7 +85,7 @@ class SignupActivity : AppCompatActivity() {
                 password != confirmPassword -> showToast("Passwords do not match. Please try again.")
                 else -> {
                     showToast("Account created successfully!")
-                    startActivity(Intent(this, HomePage::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                 }
             }
         }
