@@ -1,44 +1,96 @@
 package com.example.kotlinproject
 
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.FragmentManager
+import com.example.kotlinproject.databinding.ActivityMainBinding
+import androidx.appcompat.app.ActionBarDrawerToggle
+import com.google.android.material.navigation.NavigationView
+import androidx.activity.OnBackPressedCallback
 
-class MainActivity : AppCompatActivity() {
 
 
-    lateinit var bottomNavigationView: BottomNavigationView
+
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+
+    private lateinit var fragmentManager: FragmentManager
+    private lateinit var binding: ActivityMainBinding
+
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                onBackPressedDispatcher.onBackPressed()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        bottomNavigationView = findViewById(R.id.bottomnavigationview)
+        setSupportActionBar(binding.toolbar)
 
-        setCurrentfragment(HomePagee()) //BYPASS THE MAINACTIVITY AND GO TO HOMEPAGEE
-        bottomNavigationView.setOnItemSelectedListener { item->
-            when(item.itemId){
-                R.id.ic_home -> setCurrentfragment(HomePagee())
-                R.id.ic_analytics -> setCurrentfragment( Analytics())
-                R.id.ic_completedTask -> setCurrentfragment(CompletedTask())
-                R.id.ic_profile -> setCurrentfragment(UserProfile())
+        val toggle = ActionBarDrawerToggle(
+            this, binding.drawerLayout,
+            binding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
-                else->{}
+        binding.hamburgerMenu.setNavigationItemSelectedListener(this)
+
+        binding.bottomnavigationview.background = null
+        binding.bottomnavigationview.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.ic_home -> openFragment(HomePagee())
+                R.id.ic_analytics -> openFragment(Analytics())
+                R.id.ic_completedTask -> openFragment(CompletedTask())
+                R.id.ic_profile -> openFragment(UserProfile())
             }
             true
 
         }
+        fragmentManager = supportFragmentManager
+        openFragment(HomePagee())
+
+        binding.btnAdd.setOnClickListener {
+            Toast.makeText(this, "Add New Task", Toast.LENGTH_SHORT).show()
+
+        }
+        onBackPressedDispatcher.addCallback(this, backPressedCallback)
+
 
     }
-    private fun setCurrentfragment(fragment: Fragment) =
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.ic_dashboard  -> openFragment(Dashboard())
+            R.id.ic_userprofile -> openFragment(UserProfile())
+            R.id.ic_analytics -> openFragment(Analytics())
+            R.id.ic_calendar -> openFragment(Calendar())
+        }
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+
+
+    private fun openFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flMainFragment, fragment)
+            replace(R.id.flFragment, fragment)
             commit()
         }
+
+
 }
